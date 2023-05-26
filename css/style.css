@@ -410,6 +410,7 @@ section{
 }
 
 .quick-select .box-container .box .flex{
+   display : flex;
    flex-wrap: wrap;
    gap: 1rem;
    padding-top: 2rem;
