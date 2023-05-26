@@ -41,7 +41,54 @@ $total_bookmarked = $select_bookmark->rowCount();
 
 <?php include 'components/user_header.php'; ?>
 
-<!-- quick select section starts  -->
+<!-- quotes section -->
+<section class="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="images/about-img.svg" alt="">
+      </div>
+
+      <div class="content">
+      <div class="content">
+  <h3>Quotes</h3>
+  <p id="quote">Loading...</p>
+  <a href="#" class="inline-btn" id="next-quote-btn">Next Quotes</a>
+</div>
+
+<script>
+  // Function to fetch a new quote
+  function fetchNewQuote() {
+    // Make a request to the quote API
+    fetch('https://api.quotable.io/random')
+      .then(response => response.json())
+      .then(data => {
+        var quote = data.content;
+        var author = data.author;
+
+        // Update the quote element with the new quote
+        document.getElementById('quote').textContent = `"${quote}" - ${author}`;
+      })
+      .catch(error => console.log(error));
+  }
+
+  // Function to handle the "Get Started" button click event
+  function handleNextQuote() {
+    fetchNewQuote();
+  }
+
+  // Call the fetchNewQuote function initially to display the first quote
+  fetchNewQuote();
+
+  // Add event listener to the "Get Started" button to trigger the next quote
+  document.getElementById('next-quote-btn').addEventListener('click', handleNextQuote);
+</script>
+
+
+   </div>
+
+</section>
 
 <section class="quick-select">
 
@@ -74,8 +121,8 @@ $total_bookmarked = $select_bookmark->rowCount();
       <?php
       }
       ?>
-
-      <div class="box">
+      
+<div class="box">
          <h3 class="title">top categories</h3>
          <div class="flex">
             <a href="search_course.php?"><i class="fas fa-code"></i><span>development</span></a>
@@ -89,26 +136,28 @@ $total_bookmarked = $select_bookmark->rowCount();
          </div>
       </div>
 
-      <div class="box">
-         <h3 class="title">popular topics</h3>
-         <div class="flex">
-            <a href="#"><i class="fab fa-html5"></i><span>HTML</span></a>
-            <a href="#"><i class="fab fa-css3"></i><span>CSS</span></a>
-            <a href="#"><i class="fab fa-js"></i><span>javascript</span></a>
-            <a href="#"><i class="fab fa-react"></i><span>react</span></a>
-            <a href="#"><i class="fab fa-php"></i><span>PHP</span></a>
-            <a href="#"><i class="fab fa-bootstrap"></i><span>bootstrap</span></a>
-         </div>
+   <div class="box tutor">
+         <p id="clock"></p>
       </div>
+      <script>
+  
+         function updateClock() {
+         var currentTime = new Date();
+         var hours = currentTime.getHours();
+         var minutes = currentTime.getMinutes();
+         var seconds = currentTime.getSeconds();
 
-      <div class="box tutor">
-         <h3 class="title">become a tutor</h3>
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, laudantium.</p>
-         <a href="admin/register.php" class="inline-btn">get started</a>
-      </div>
+         minutes = (minutes < 10 ? "0" : "") + minutes;
+         seconds = (seconds < 10 ? "0" : "") + seconds;
 
-   </div>
+         var timeString = hours + ":" + minutes + ":" + seconds;
 
+         document.getElementById("clock").textContent = timeString;
+      }
+
+  // Call the updateClock function every second to keep the clock updated
+  setInterval(updateClock, 1000);
+</script>
 </section>
 
 <!-- quick select section ends -->
@@ -160,16 +209,6 @@ $total_bookmarked = $select_bookmark->rowCount();
 </section>
 
 <!-- courses section ends -->
-
-
-
-
-
-
-
-
-
-
 
 
 <!-- custom js file link  -->
