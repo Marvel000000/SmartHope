@@ -81,6 +81,24 @@ CREATE TABLE `content` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blog`
+--
+
+CREATE TABLE `blog`(
+  `id` varchar(20) NOT NULL,
+  `tutor_id` varchar(20) NOT NULL,
+  `playlist_id` varchar(20) NOT NULL,
+  `title` varchar(1000) NOT NULL,
+  `description` varchar(5000) NOT NULL,
+  `content` text,
+  `thumb` varchar(100) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(20) NOT NULL DEFAULT 'deactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `likes`
 --
 
