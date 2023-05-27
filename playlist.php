@@ -49,7 +49,7 @@ if(isset($_POST['save_list'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>playlist</title>
+   <title>Playlist</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -82,6 +82,10 @@ if(isset($_POST['save_list'])){
             $count_videos->execute([$playlist_id]);
             $total_videos = $count_videos->rowCount();
 
+            $count_post = $conn->prepare("SELECT * FROM `blog` WHERE playlist_id = ?");
+            $count_post->execute([$playlist_id]);
+            $total_post = $count_post->rowCount();
+
             $select_tutor = $conn->prepare("SELECT * FROM `tutors` WHERE id = ? LIMIT 1");
             $select_tutor->execute([$fetch_playlist['tutor_id']]);
             $fetch_tutor = $select_tutor->fetch(PDO::FETCH_ASSOC);
@@ -97,17 +101,17 @@ if(isset($_POST['save_list'])){
             <?php
                if($select_bookmark->rowCount() > 0){
             ?>
-            <button type="submit" name="save_list"><i class="fas fa-bookmark"></i><span>saved</span></button>
+            <button type="submit" name="save_list"><i class="fas fa-bookmark"></i><span>Saved</span></button>
             <?php
                }else{
             ?>
-               <button type="submit" name="save_list"><i class="far fa-bookmark"></i><span>save playlist</span></button>
+               <button type="submit" name="save_list"><i class="far fa-bookmark"></i><span>Save Playlist</span></button>
             <?php
                }
             ?>
          </form>
          <div class="thumb">
-            <span><?= $total_videos; ?> videos</span>
+            <span><?= $total_videos; ?> videos and <?= $total_post; ?> posts</span>
             <img src="uploaded_files/<?= $fetch_playlist['thumb']; ?>" alt="">
          </div>
       </div>
@@ -161,7 +165,7 @@ if(isset($_POST['save_list'])){
       <?php
             }
          }else{
-            echo '<p class="empty">no videos added yet!</p>';
+            echo '<p class="empty">No videos added yet!</p>';
          }
       ?>
 
@@ -171,15 +175,35 @@ if(isset($_POST['save_list'])){
 
 <!-- videos container section ends -->
 
+<!-- article container section -->
 
+<section class="videos-container">
 
+   <h1 class="heading">Playlist course</h1>
 
+   <div class="box-container">
 
+   <?php
+         $select_blog = $conn->prepare("SELECT * FROM `blog` WHERE playlist_id = ? AND status = ? ORDER BY date DESC");
+         $select_blog->execute([$get_id, 'active']);
+         if($select_blog->rowCount() > 0){
+            while($fetch_blog = $select_blog->fetch(PDO::FETCH_ASSOC)){  
+      ?>
+      <a href="posts.php?get_id=<?= $fetch_blog['id']; ?>" class="box">
+         <i class="fas fa-play"></i>
+         <img src="uploaded_files/<?= $fetch_blog['thumb']; ?>" alt="">
+         <h3><?= $fetch_blog['title']; ?></h3>
+      </a>
+      <?php
+            }
+         }else{
+            echo '<p class="empty">No post added yet!</p>';
+         }
+      ?>
 
+      </div>
 
-
-
-
+      </section>
 
 <?php include 'components/footer.php'; ?>
 
