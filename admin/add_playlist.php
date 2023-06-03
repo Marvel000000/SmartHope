@@ -60,40 +60,25 @@ if(isset($_POST['submit'])){
    
 <section class="playlist-form">
 
-   <h1 class="heading">create playlist</h1>
+   <h1 class="heading">Create Playlist</h1>
 
    <form action="" method="post" enctype="multipart/form-data">
-      <p>playlist status <span>*</span></p>
+      <p>Playlist Status <span>*</span></p>
       <select name="status" class="box" required>
-         <option value="" selected disabled>-- select status</option>
-         <option value="active">active</option>
-         <option value="deactive">deactive</option>
+         <option value="" selected disabled>-- Select status</option>
+         <option value="active">Active</option>
+         <option value="deactive">Deactive</option>
       </select>
-      <p>playlist title <span>*</span></p>
-      <input type="text" name="title" maxlength="100" required placeholder="enter playlist title" class="box">
-      <p>playlist description <span>*</span></p>
-      <textarea name="description" class="box" required placeholder="write description" maxlength="1000" cols="30" rows="10"></textarea>
-      <p>playlist thumbnail <span>*</span></p>
+      <p>Playlist Title <span>*</span></p>
+      <input type="text" name="title" maxlength="100" required placeholder="Enter playlist title" class="box">
+      <p>Playlist Description <span>*</span></p>
+      <textarea name="description" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10"></textarea>
+      <p>Playlist Thumbnail <span>*</span></p>
       <input type="file" name="image" accept="image/*" required class="box">
       <input type="submit" value="create playlist" name="submit" class="btn">
    </form>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="../js/admin_script.js"></script>
 

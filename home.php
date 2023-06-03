@@ -128,14 +128,14 @@ $total_bookmarked = $select_bookmark->rowCount();
       <?php
          }
       }else{
-         echo '<p class="empty">no courses added yet!</p>';
+         echo '<p class="empty">No courses added yet!</p>';
       }
       ?>
 
    </div>
 
    <div class="more-btn">
-      <a href="courses.php" class="inline-option-btn">view more</a>
+      <a href="courses.php" class="inline-option-btn">View More</a>
    </div>
 
 </section>

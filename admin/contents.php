@@ -29,11 +29,31 @@ if(isset($_POST['delete_video'])){
       $delete_comments->execute([$delete_id]);
       $delete_content = $conn->prepare("DELETE FROM `content` WHERE id = ?");
       $delete_content->execute([$delete_id]);
-      $message[] = 'video deleted!';
+      $message[] = 'Video deleted!';
    }else{
-      $message[] = 'video already deleted!';
+      $message[] = 'Video already deleted!';
    }
 
+}
+elseif(isset($_POST['delete_blog'])){
+   $delete_id = $_POST['blog_id'];
+   $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
+   $verify_blog = $conn->prepare("SELECT * FROM `blog` WHERE id = ? LIMIT 1");
+   $verify_blog->execute([$delete_id]);
+   if($verify_blog->rowCount() > 0){
+      $delete_blog_thumb = $conn->prepare("SELECT * FROM `blog` WHERE id = ? LIMIT 1");
+      $delete_blog_thumb->execute([$delete_id]);
+      $fetch_thumb = $delete_blog_thumb->fetch(PDO::FETCH_ASSOC);
+      unlink('../uploaded_files/'.$fetch_thumb['thumb']);
+      $delete_blog = $conn->prepare("SELECT * FROM `blog` WHERE id = ? LIMIT 1");
+      $delete_blog->execute([$delete_id]);
+      $fetch_blog = $delete_blog->fetch(PDO::FETCH_ASSOC);
+      $delete_content = $conn->prepare("DELETE FROM `blog` WHERE id = ?");
+      $delete_content->execute([$delete_id]);
+      $message[] = 'Blog deleted!';
+   }else{
+      $message[] = 'Blog already deleted!';
+   }
 }
 
 ?>
@@ -60,13 +80,13 @@ if(isset($_POST['delete_video'])){
    
 <section class="contents">
 
-   <h1 class="heading">your contents</h1>
+   <h1 class="heading">Your Contents</h1>
 
    <div class="box-container">
 
    <div class="box" style="text-align: center;">
-      <h3 class="title" style="margin-bottom: .5rem;">create new content</h3>
-      <a href="add_content.php" class="btn">add content</a>
+      <h3 class="title" style="margin-bottom: .5rem;">Create new content</h3>
+      <a href="add_content.php" class="btn">Add content</a>
    </div>
    <?php
       $select_videos = $conn->prepare("SELECT * FROM `content` WHERE tutor_id = ? ORDER BY date DESC");
@@ -87,21 +107,15 @@ if(isset($_POST['delete_video'])){
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="video_id" value="<?= $video_id; ?>">
             <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this video?');" name="delete_video">
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this video?');" name="delete_video">
          </form>
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">view content</a>
+         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">View Content</a>
       </div>
 
-
-
-
-
-
-      
    <?php
          }
       }else{
-         echo '<p class="empty">no contents added yet!</p>';
+         echo '<p class="empty">No contents added yet!</p>';
       }
    ?>
 
@@ -112,13 +126,13 @@ if(isset($_POST['delete_video'])){
 
 <section class="contents">
 
-   <h1 class="heading">your blog</h1>
+   <h1 class="heading">Your blog</h1>
 
    <div class="box-container">
 
    <div class="box" style="text-align: center;">
-      <h3 class="title" style="margin-bottom: .5rem;">create new blog</h3>
-      <a href="add_post.php" class="btn">add blog</a>
+      <h3 class="title" style="margin-bottom: .5rem;">Create new blog</h3>
+      <a href="add_post.php" class="btn">Add blog</a>
    </div>
 
 <?php
@@ -139,33 +153,23 @@ if(isset($_POST['delete_video'])){
          <img src="../uploaded_files/<?= $fecth_blog['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fecth_blog['title']; ?></h3>
          <form action="" method="post" class="flex-btn">
-            <input type="hidden" name="video_id" value="<?= $video_id; ?>">
-            <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this blog?');" name="delete_blog">
+            <input type="hidden" name="blog_id" value="<?= $blog_id; ?>">
+            <a href="update_content.php?get_id=<?= $blog_id; ?>" class="option-btn">Update</a>
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this blog?');" name="delete_blog">
          </form>
-         <a href="view_blog.php?get_id=<?= $blog_id; ?>" class="btn">view blog</a>
+         <a href="view_blog.php?get_id=<?= $blog_id; ?>" class="btn">View Blog</a>
       </div>
 
       <?php
          }
       }else{
-         echo '<p class="empty">no blog added yet!</p>';
+         echo '<p class="empty">No blog added yet!</p>';
       }
    ?>
 
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
 
 <script src="../js/admin_script.js"></script>
 

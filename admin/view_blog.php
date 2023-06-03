@@ -230,9 +230,11 @@ if(isset($_POST['update_now'])){
          $select_comments->execute([$get_id]);
          if($select_comments->rowCount() > 0){
             while($fetch_comment = $select_comments->fetch(PDO::FETCH_ASSOC)){   
-               $select_commentor = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+               $select_commentor = $conn->prepare("SELECT * FROM `tutors` WHERE id = ?");
                $select_commentor->execute([$fetch_comment['user_id']]);
                $fetch_commentor = $select_commentor->fetch(PDO::FETCH_ASSOC);
+
+               if ($fetch_commentor && is_array($fetch_commentor))
       ?>
       <div class="box" style="<?php if($fetch_comment['user_id'] == $user_id){echo 'order:-1;';} ?>">
          <div class="user">

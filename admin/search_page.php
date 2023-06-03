@@ -35,6 +35,26 @@ if(isset($_POST['delete_video'])){
    }
 
 }
+elseif(isset($_POST['delete_blog'])){
+   $delete_id = $_POST['blog_id'];
+   $delete_id = filter_var($delete_id, FILTER_SANITIZE_STRING);
+   $verify_blog = $conn->prepare("SELECT * FROM `blog` WHERE id = ? LIMIT 1");
+   $verify_blog->execute([$delete_id]);
+   if($verify_blog->rowCount() > 0){
+      $delete_blog_thumb = $conn->prepare("SELECT * FROM `blog` WHERE id = ? LIMIT 1");
+      $delete_blog_thumb->execute([$delete_id]);
+      $fetch_thumb = $delete_blog_thumb->fetch(PDO::FETCH_ASSOC);
+      unlink('../uploaded_files/'.$fetch_thumb['thumb']);
+      $delete_blog = $conn->prepare("SELECT * FROM `blog` WHERE id = ? LIMIT 1");
+      $delete_blog->execute([$delete_id]);
+      $fetch_blog = $delete_blog->fetch(PDO::FETCH_ASSOC);
+      $delete_content = $conn->prepare("DELETE FROM `blog` WHERE id = ?");
+      $delete_content->execute([$delete_id]);
+      $message[] = 'Blog deleted!';
+   }else{
+      $message[] = 'Blog already deleted!';
+   }
+}
 
 if(isset($_POST['delete_playlist'])){
    $delete_id = $_POST['playlist_id'];
@@ -55,9 +75,9 @@ if(isset($_POST['delete_playlist'])){
    $delete_bookmark->execute([$delete_id]);
    $delete_playlist = $conn->prepare("DELETE FROM `playlist` WHERE id = ?");
    $delete_playlist->execute([$delete_id]);
-   $message[] = 'playlist deleted!';
+   $message[] = 'Playlist deleted!';
    }else{
-      $message[] = 'playlist already deleted!';
+      $message[] = 'Playlist already deleted!';
    }
 }
 
@@ -85,7 +105,7 @@ if(isset($_POST['delete_playlist'])){
    
 <section class="contents">
 
-   <h1 class="heading">contents</h1>
+   <h1 class="heading">Contents</h1>
 
    <div class="box-container">
 
@@ -107,18 +127,61 @@ if(isset($_POST['delete_playlist'])){
          <h3 class="title"><?= $fecth_videos['title']; ?></h3>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="video_id" value="<?= $video_id; ?>">
-            <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this video?');" name="delete_video">
+            <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">Update</a>
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this video?');" name="delete_video">
          </form>
          <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">view content</a>
       </div>
    <?php
          }
       }else{
-         echo '<p class="empty">no contents founds!</p>';
+         echo '<p class="empty">No contents founds!</p>';
       }
    }else{
-      echo '<p class="empty">please search something!</p>';
+      echo '<p class="empty">Please search something!</p>';
+   }
+   ?>
+
+   </div>
+
+</section>
+
+<section class="contents">
+
+   <h1 class="heading">Blog</h1>
+
+   <div class="box-container">
+
+   <?php
+      if(isset($_POST['search']) or isset($_POST['search_btn'])){
+      $search = $_POST['search'];
+      $select_blog = $conn->prepare("SELECT * FROM `blog` WHERE title LIKE '%{$search}%' AND tutor_id = ? ORDER BY date DESC");
+      $select_blog->execute([$tutor_id]);
+       if($select_blog->rowCount() > 0){
+          while($fecth_blog = $select_blog->fetch(PDO::FETCH_ASSOC)){ 
+            $blog_id = $fecth_blog['id'];
+   ?>
+      <div class="box">
+         <div class="flex">
+            <div><i class="fas fa-dot-circle" style="<?php if($fecth_blog['status'] == 'active'){echo 'color:limegreen'; }else{echo 'color:red';} ?>"></i><span style="<?php if($fecth_blog['status'] == 'active'){echo 'color:limegreen'; }else{echo 'color:red';} ?>"><?= $fecth_blog['status']; ?></span></div>
+            <div><i class="fas fa-calendar"></i><span><?= $fecth_blog['date']; ?></span></div>
+         </div>
+         <img src="../uploaded_files/<?= $fecth_blog['thumb']; ?>" class="thumb" alt="">
+         <h3 class="title"><?= $fecth_blog['title']; ?></h3>
+         <form action="" method="post" class="flex-btn">
+            <input type="hidden" name="blog_id" value="<?= $blog_id; ?>">
+            <a href="update_content.php?get_id=<?= $blog_id; ?>" class="option-btn">Update</a>
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this blog?');" name="delete_blog">
+         </form>
+         <a href="view_blog.php?get_id=<?= $blog_id; ?>" class="btn">View Blog</a>
+      </div>
+   <?php
+         }
+      }else{
+         echo '<p class="empty">No contents founds!</p>';
+      }
+   }else{
+      echo '<p class="empty">Please search something!</p>';
    }
    ?>
 
@@ -128,7 +191,7 @@ if(isset($_POST['delete_playlist'])){
 
 <section class="playlists">
 
-   <h1 class="heading">playlists</h1>
+   <h1 class="heading">Playlists</h1>
 
    <div class="box-container">
    
@@ -157,37 +220,23 @@ if(isset($_POST['delete_playlist'])){
          <p class="description"><?= $fetch_playlist['description']; ?></p>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="playlist_id" value="<?= $playlist_id; ?>">
-            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">update</a>
-            <input type="submit" value="delete_playlist" class="delete-btn" onclick="return confirm('delete this playlist?');" name="delete">
+            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">Update</a>
+            <input type="submit" value="delete_playlist" class="delete-btn" onclick="return confirm('Delete this playlist?');" name="delete">
          </form>
-         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">view playlist</a>
+         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">View Playlist</a>
       </div>
       <?php
          } 
       }else{
-         echo '<p class="empty">no playlists found!</p>';
+         echo '<p class="empty">No playlists found!</p>';
       }}else{
-         echo '<p class="empty">please search something!</p>';
+         echo '<p class="empty">Please search something!</p>';
       }
       ?>
 
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

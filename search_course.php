@@ -33,7 +33,7 @@ if(isset($_COOKIE['user_id'])){
 
 <section class="courses">
 
-   <h1 class="heading">search results</h1>
+   <h1 class="heading">Search Results</h1>
 
    <div class="box-container">
 
@@ -60,15 +60,15 @@ if(isset($_COOKIE['user_id'])){
          </div>
          <img src="uploaded_files/<?= $fetch_course['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fetch_course['title']; ?></h3>
-         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">view playlist</a>
+         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">View Playlist</a>
       </div>
       <?php
          }
       }else{
-         echo '<p class="empty">no courses found!</p>';
+         echo '<p class="empty">No courses found!</p>';
       }
       }else{
-         echo '<p class="empty">please search something!</p>';
+         echo '<p class="empty">Please search something!</p>';
       }
       ?>
 
@@ -77,17 +77,6 @@ if(isset($_COOKIE['user_id'])){
 </section>
 
 <!-- courses section ends -->
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>

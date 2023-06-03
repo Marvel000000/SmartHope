@@ -105,15 +105,15 @@ if(isset($_POST['delete_video'])){
          <div class="description"><?= $fetch_playlist['description']; ?></div>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="playlist_id" value="<?= $playlist_id; ?>">
-            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">update playlist</a>
-            <input type="submit" value="delete playlist" class="delete-btn" onclick="return confirm('delete this playlist?');" name="delete">
+            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">Update Playlist</a>
+            <input type="submit" value="delete playlist" class="delete-btn" onclick="return confirm('Delete this playlist?');" name="delete">
          </form>
       </div>
    </div>
    <?php
          }
       }else{
-         echo '<p class="empty">no playlist found!</p>';
+         echo '<p class="empty">No playlist found!</p>';
       }
    ?>
 
@@ -121,7 +121,7 @@ if(isset($_POST['delete_video'])){
 
 <section class="contents">
 
-   <h1 class="heading">playlist videos</h1>
+   <h1 class="heading">Playlist Videos</h1>
 
    <div class="box-container">
 
@@ -141,10 +141,10 @@ if(isset($_POST['delete_video'])){
          <h3 class="title"><?= $fecth_videos['title']; ?></h3>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="video_id" value="<?= $video_id; ?>">
-            <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this video?');" name="delete_video">
+            <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">Update</a>
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this video?');" name="delete_video">
          </form>
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">watch video</a>
+         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">Watch Video</a>
       </div>
       
    <?php
@@ -159,13 +159,13 @@ if(isset($_POST['delete_video'])){
 
 <section class="contents">
 
-   <h1 class="heading">your blog</h1>
+   <h1 class="heading">Your Blog</h1>
 
    <div class="box-container">
 
    <div class="box" style="text-align: center;">
-      <h3 class="title" style="margin-bottom: .5rem;">create new blog</h3>
-      <a href="add_post.php" class="btn">add blog</a>
+      <h3 class="title" style="margin-bottom: .5rem;">Create new blog</h3>
+      <a href="add_post.php" class="btn">Add blog</a>
    </div>
 
 <?php
@@ -187,37 +187,22 @@ if(isset($_POST['delete_video'])){
          <h3 class="title"><?= $fecth_blog['title']; ?></h3>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="video_id" value="<?= $video_id; ?>">
-            <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this blog?');" name="delete_blog">
+            <a href="update_blog.php?get_id=<?= $video_id; ?>" class="option-btn">update</a>
+            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this blog?');" name="delete_blog">
          </form>
-         <a href="view_blog.php?get_id=<?= $blog_id; ?>" class="btn">view blog</a>
+         <a href="view_blog.php?get_id=<?= $blog_id; ?>" class="btn">View Blog</a>
       </div>
 
       <?php
          }
       }else{
-         echo '<p class="empty">no blog added yet!</p>';
+         echo '<p class="empty">No blog added yet!</p>';
       }
    ?>
 
    </div>
    <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">add blogs</a>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="../js/admin_script.js"></script>
 

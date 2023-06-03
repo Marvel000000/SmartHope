@@ -18,7 +18,7 @@ if(isset($message)){
       <a href="home.php" class="logo">SmartHope</a>
 
       <form action="search_course.php" method="post" class="search-form">
-         <input type="text" name="search_course" placeholder="search courses..." required maxlength="100">
+         <input type="text" name="search_course" placeholder="Search courses..." required maxlength="100">
          <button type="submit" class="fas fa-search" name="search_course_btn"></button>
       </form>
 
@@ -37,19 +37,19 @@ if(isset($message)){
          <img src="uploaded_files/<?= $fetch_profile['image']; ?>" alt="">
          <h3><?= $fetch_profile['name']; ?></h3>
          <span>student</span>
-         <a href="profile.php" class="btn">view profile</a>
+         <a href="profile.php" class="btn">View profile</a>
          <div class="flex-btn">
-            <a href="login.php" class="option-btn">login</a>
-            <a href="register.php" class="option-btn">register</a>
+            <a href="login.php" class="option-btn">Login</a>
+            <a href="register.php" class="option-btn">Register</a>
          </div>
-         <a href="components/user_logout.php" onclick="return confirm('logout from this website?');" class="delete-btn">logout</a>
+         <a href="components/user_logout.php" onclick="return confirm('Logout from this website?');" class="delete-btn">Logout</a>
          <?php
             }else{
          ?>
          <h3>please login or register</h3>
           <div class="flex-btn">
-            <a href="admin/login.php" class="option-btn">login</a>
-            <a href="admin/register.php" class="option-btn">register</a>
+            <a href="admin/login.php" class="option-btn">Login</a>
+            <a href="admin/register.php" class="option-btn">Register</a>
          </div>
          <?php
             }
@@ -80,14 +80,14 @@ if(isset($message)){
          <img src="uploaded_files/<?= $fetch_profile['image']; ?>" alt="">
          <h3><?= $fetch_profile['name']; ?></h3>
          <span>student</span>
-         <a href="profile.php" class="btn">view profile</a>
+         <a href="profile.php" class="btn">View Profile</a>
          <?php
             }else{
          ?>
-         <h3>please login or register</h3>
+         <h3>Please login or register</h3>
           <div class="flex-btn" style="padding-top: .5rem;">
-          <a href="admin/login.php" class="option-btn">login</a>
-            <a href="admin/register.php" class="option-btn">register</a>
+          <a href="admin/login.php" class="option-btn">Login</a>
+            <a href="admin/register.php" class="option-btn">Register</a>
          </div>
          <?php
             }
@@ -95,8 +95,8 @@ if(isset($message)){
       </div>
 
    <nav class="navbar">
-      <a href="home.php"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="courses.php"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="home.php"><i class="fas fa-home"></i><span>Home</span></a>
+      <a href="courses.php"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
    </nav>
 
 </div>

@@ -18,6 +18,10 @@ $select_contents = $conn->prepare("SELECT * FROM `content` WHERE tutor_id = ?");
 $select_contents->execute([$tutor_id]);
 $total_contents = $select_contents->rowCount();
 
+$select_blog = $conn->prepare("SELECT * FROM `blog` WHERE tutor_id = ?");
+$select_blog->execute([$tutor_id]);
+$total_post = $select_blog->rowCount();
+
 $select_playlists = $conn->prepare("SELECT * FROM `playlist` WHERE tutor_id = ?");
 $select_playlists->execute([$tutor_id]);
 $total_playlists = $select_playlists->rowCount();
@@ -103,33 +107,38 @@ $total_comments = $select_comments->rowCount();
    
 <section class="dashboard">
 
-   <h1 class="heading">dashboard</h1>
+   <h1 class="heading">Dashboard</h1>
 
    <div class="box-container">
 
       <div class="box">
-         <h3>welcome!</h3>
+         <h3>Welcome!</h3>
          <p><?= $fetch_profile['name']; ?></p>
-         <a href="profile.php" class="btn">view profile</a>
-      </div>
-
-      <div class="box">
-         <h3><?= $total_contents; ?></h3>
-         <p>total contents</p>
-         <a href="add_content.php" class="btn">add new content</a>
+         <a href="profile.php" class="btn">View Profile</a>
       </div>
 
       <div class="box">
          <h3><?= $total_playlists; ?></h3>
-         <p>total playlists</p>
-         <a href="add_playlist.php" class="btn">add new playlist</a>
+         <p>Total Playlists</p>
+         <a href="add_playlist.php" class="btn">Add new playlist</a>
       </div>
 
+      <div class="box">
+         <h3><?= $total_contents; ?></h3>
+         <p>Total Contents</p>
+         <a href="add_content.php" class="btn">Add new content</a>
+      </div>
+
+      <div class="box">
+         <h3><?= $total_post; ?></h3>
+         <p>Total Blog Post</p>
+         <a href="add_post.php" class="btn">Add new post</a>
+      </div>
 
       <div class="box">
          <h3><?= $total_comments; ?></h3>
-         <p>total comments</p>
-         <a href="comments.php" class="btn">view comments</a>
+         <p>Total Comments</p>
+         <a href="comments.php" class="btn">View comments</a>
       </div>
 
 
@@ -163,33 +172,18 @@ $total_comments = $select_comments->rowCount();
          </div>
          <img src="../uploaded_files/<?= $fetch_course['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fetch_course['title']; ?></h3>
-         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">view playlist</a>
+         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">View playlist</a>
       </div>
       <?php
          }
       }else{
-         echo '<p class="empty">no courses added yet!</p>';
+         echo '<p class="empty">No courses added yet!</p>';
       }
       ?>
 
    </div>
 
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="../js/admin_script.js"></script>
 

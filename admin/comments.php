@@ -20,9 +20,9 @@ if(isset($_POST['delete_comment'])){
    if($verify_comment->rowCount() > 0){
       $delete_comment = $conn->prepare("DELETE FROM `comments` WHERE id = ?");
       $delete_comment->execute([$delete_id]);
-      $message[] = 'comment deleted successfully!';
+      $message[] = 'Comment deleted successfully!';
    }else{
-      $message[] = 'comment already deleted!';
+      $message[] = 'Comment already deleted!';
    }
 
 }
@@ -52,50 +52,59 @@ if(isset($_POST['delete_comment'])){
 
 <section class="comments">
 
-   <h1 class="heading">user comments</h1>
+   <h1 class="heading">User Comments</h1>
 
    
    <div class="show-comments">
-      <?php
-         $select_comments = $conn->prepare("SELECT * FROM `comments` WHERE tutor_id = ?");
-         $select_comments->execute([$tutor_id]);
-         if($select_comments->rowCount() > 0){
-            while($fetch_comment = $select_comments->fetch(PDO::FETCH_ASSOC)){
-               $select_content = $conn->prepare("SELECT * FROM `content` WHERE id = ?");
-               $select_content->execute([$fetch_comment['content_id']]);
-               $fetch_content = $select_content->fetch(PDO::FETCH_ASSOC);
-      ?>
-      <div class="box" style="<?php if($fetch_comment['tutor_id'] == $tutor_id){echo 'order:-1;';} ?>">
-         <div class="content"><span><?= $fetch_comment['date']; ?></span><p> - <?= $fetch_content['title']; ?> - </p><a href="view_content.php?get_id=<?= $fetch_content['id']; ?>">view content</a></div>
-         <p class="text"><?= $fetch_comment['comment']; ?></p>
-         <form action="" method="post">
-            <input type="hidden" name="comment_id" value="<?= $fetch_comment['id']; ?>">
-            <button type="submit" name="delete_comment" class="inline-delete-btn" onclick="return confirm('delete this comment?');">delete comment</button>
-         </form>
-      </div>
-      <?php
-       }
-      }else{
-         echo '<p class="empty">no comments added yet!</p>';
+   <?php
+      $select_comments = $conn->prepare("SELECT * FROM `comments` WHERE tutor_id = ?");
+      $select_comments->execute([$tutor_id]);
+      if($select_comments->rowCount() > 0){
+         while($fetch_comment = $select_comments->fetch(PDO::FETCH_ASSOC)){
+            $content_type = ''; // Variable to determine the content type (video or blog)
+            $content_title = ''; // Variable to store the content title
+            
+            // Check if the comment is associated with a video
+            $select_video = $conn->prepare("SELECT * FROM `content` WHERE id = ? AND tutor_id = ?");
+            $select_video->execute([$fetch_comment['content_id'], $tutor_id]);
+            if($select_video->rowCount() > 0){
+               $fetch_video = $select_video->fetch(PDO::FETCH_ASSOC);
+               $content_type = 'video';
+               $content_title = $fetch_video['title'];
+            } else {
+               // If the comment is not associated with a video, check if it's associated with a blog post
+               $select_blog = $conn->prepare("SELECT * FROM `blog` WHERE id = ? AND tutor_id = ?");
+               $select_blog->execute([$fetch_comment['content_id'], $tutor_id]);
+               if($select_blog->rowCount() > 0){
+                  $fetch_blog = $select_blog->fetch(PDO::FETCH_ASSOC);
+                  $content_type = 'blog';
+                  $content_title = $fetch_blog['title'];
+               }
+            }
+            
+            // Display the comment and content information
+            if($content_type !== ''){
+   ?>
+   <div class="box" style="<?php if($fetch_comment['tutor_id'] == $tutor_id){echo 'order:-1;';} ?>">
+      <div class="content"><span><?= $fetch_comment['date']; ?></span><p> - <?= $content_title; ?> - </p><a href="<?php echo ($content_type === 'video') ? 'watch_video.php?get_id=' . $fetch_video['id'] : 'view_blog.php?get_id=' . $fetch_blog['id']; ?>">View Content</a></div>
+      <p class="text"><?= $fetch_comment['comment']; ?></p>
+      <form action="" method="post">
+         <input type="hidden" name="comment_id" value="<?= $fetch_comment['id']; ?>">
+         <button type="submit" name="delete_comment" class="inline-delete-btn" onclick="return confirm('Delete this comment?');">Delete Comment</button>
+      </form>
+   </div>
+   <?php
+            } else {
+               echo '<p class="empty">No matching content found for comment ID: ' . $fetch_comment['id'] . '</p>';
+            }
+         }
+      } else {
+         echo '<p class="empty">No comments added yet!</p>';
       }
-      ?>
-      </div>
+   ?>
+</div>
    
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <script src="../js/admin_script.js"></script>
 
