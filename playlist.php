@@ -178,32 +178,30 @@ if(isset($_POST['save_list'])){
 <!-- article container section -->
 
 <section class="videos-container">
+<h1 class="heading">playlist blogs</h1>
 
-   <h1 class="heading">Playlist course</h1>
+<div class="box-container">
 
-   <div class="box-container">
-
-   <?php
-         $select_blog = $conn->prepare("SELECT * FROM `blog` WHERE playlist_id = ? AND status = ? ORDER BY date DESC");
-         $select_blog->execute([$get_id, 'active']);
-         if($select_blog->rowCount() > 0){
-            while($fetch_blog = $select_blog->fetch(PDO::FETCH_ASSOC)){  
+<?php
+         $select_content = $conn->prepare("SELECT * FROM `blog` WHERE playlist_id = ? AND status = ? ORDER BY date DESC");
+         $select_content->execute([$get_id, 'active']);
+         if($select_content->rowCount() > 0){
+            while($fetch_content = $select_content->fetch(PDO::FETCH_ASSOC)){  
       ?>
-      <a href="posts.php?get_id=<?= $fetch_blog['id']; ?>" class="box">
-         <i class="fas fa-play"></i>
-         <img src="uploaded_files/<?= $fetch_blog['thumb']; ?>" alt="">
-         <h3><?= $fetch_blog['title']; ?></h3>
+      <a href="view_blog.php?get_id=<?= $fetch_content['id']; ?>" class="box">
+         <img src="uploaded_files/<?= $fetch_content['thumb']; ?>" alt="">
+         <h3><?= $fetch_content['title']; ?></h3>
       </a>
       <?php
             }
          }else{
-            echo '<p class="empty">No post added yet!</p>';
+            echo '<p class="empty">No videos added yet!</p>';
          }
       ?>
 
-      </div>
 
-      </section>
+</div>
+</section>
 
 <?php include 'components/footer.php'; ?>
 
