@@ -622,7 +622,7 @@ section{
    gap:2.5rem;
    flex-wrap: wrap;
    padding: 2rem;
-   background-color: var(--white);
+   background-color: #2a2a2a;
 }
 
 .playlist .row .col{
@@ -747,7 +747,7 @@ section{
    position: relative;
    border-radius: .5rem;
    padding: 2rem;
-   background-color: var(--white);
+   background-color: #2a2a2a;
 }
 
 .videos-container .box-container .box img{

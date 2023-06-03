@@ -63,8 +63,8 @@ if(isset($_POST['delete'])){
    <div class="box-container">
    
       <div class="box" style="text-align: center;">
-         <h3 class="title" style="margin-bottom: .5rem;">create new playlist</h3>
-         <a href="add_playlist.php" class="btn">add playlist</a>
+         <h3 class="title" style="margin-bottom: .5rem;">create new course</h3>
+         <a href="add_playlist.php" class="btn">add course</a>
       </div>
 
       <?php
@@ -98,7 +98,7 @@ if(isset($_POST['delete'])){
       <?php
          } 
       }else{
-         echo '<p class="empty">no playlist added yet!</p>';
+         echo '<p class="empty">no course added yet!</p>';
       }
       ?>
 
