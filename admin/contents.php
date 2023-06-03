@@ -67,7 +67,6 @@ if(isset($_POST['delete_video'])){
    <div class="box" style="text-align: center;">
       <h3 class="title" style="margin-bottom: .5rem;">create new content</h3>
       <a href="add_content.php" class="btn">add content</a>
-      <a href="add_post.php" class="btn">add blog</a>
    </div>
    <?php
       $select_videos = $conn->prepare("SELECT * FROM `content` WHERE tutor_id = ? ORDER BY date DESC");
