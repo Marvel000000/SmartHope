@@ -63,8 +63,8 @@ if(isset($_POST['delete'])){
    <div class="box-container">
    
       <div class="box" style="text-align: center;">
-         <h3 class="title" style="margin-bottom: .5rem;">Create new playlist</h3>
-         <a href="add_playlist.php" class="btn">Add playlist</a>
+         <h3 class="title" style="margin-bottom: .5rem;">Create new Course</h3>
+         <a href="add_playlist.php" class="btn">Add Course</a>
       </div>
 
       <?php
@@ -93,7 +93,7 @@ if(isset($_POST['delete'])){
             <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">Update</a>
             <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this playlist?');" name="delete">
          </form>
-         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">View Playlist</a>
+         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">View Course</a>
       </div>
       <?php
          } 

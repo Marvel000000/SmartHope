@@ -70,11 +70,6 @@
             <a href="contents.php" class="btn">View Contents</a>
          </div>
          <div class="box">
-            <span><?= $total_likes; ?></span>
-            <p>Total Likes</p>
-            <a href="contents.php" class="btn">View Contents</a>
-         </div>
-         <div class="box">
             <span><?= $total_comments; ?></span>
             <p>Total Comments</p>
             <a href="comments.php" class="btn">View Comments</a>

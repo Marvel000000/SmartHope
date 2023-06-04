@@ -123,7 +123,7 @@ $total_bookmarked = $select_bookmark->rowCount();
          </div>
          <img src="uploaded_files/<?= $fetch_course['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fetch_course['title']; ?></h3>
-         <a href="admin/login.php" class="inline-btn">view playlist</a>
+         <a href="admin/login.php" class="inline-btn">view courses</a>
       </div>
       <?php
          }

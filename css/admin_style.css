@@ -199,6 +199,7 @@ section{
    font-size: 2.5rem;
    color: var(--black);
    font-weight: bolder;
+   transition: all .4s ease-in-out;
 }
 
 .header .flex .search-form{
@@ -227,6 +228,7 @@ section{
 
 .header .flex .search-form button:hover{
    color: var(--main-color);
+   translate: 20px;
 }
 
 .header .flex .icons div{

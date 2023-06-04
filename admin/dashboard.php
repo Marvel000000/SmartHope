@@ -120,7 +120,7 @@ $total_comments = $select_comments->rowCount();
       <div class="box">
          <h3><?= $total_playlists; ?></h3>
          <p>Total Playlists</p>
-         <a href="add_playlist.php" class="btn">Add new playlist</a>
+         <a href="add_playlist.php" class="btn">Add new Courses</a>
       </div>
 
       <div class="box">
@@ -172,7 +172,7 @@ $total_comments = $select_comments->rowCount();
          </div>
          <img src="../uploaded_files/<?= $fetch_course['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fetch_course['title']; ?></h3>
-         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">View playlist</a>
+         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">View Course</a>
       </div>
       <?php
          }

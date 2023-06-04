@@ -17,22 +17,22 @@ if(isset($_GET['get_id'])){
 
 if(isset($_POST['save_list'])){
 
-   if($user_id != ''){
+   if($tutor_id != ''){
       
       $list_id = $_POST['list_id'];
       $list_id = filter_var($list_id, FILTER_SANITIZE_STRING);
 
       $select_list = $conn->prepare("SELECT * FROM `bookmark` WHERE user_id = ? AND playlist_id = ?");
-      $select_list->execute([$user_id, $list_id]);
+      $select_list->execute([$tutor_id, $list_id]);
 
       if($select_list->rowCount() > 0){
          $remove_bookmark = $conn->prepare("DELETE FROM `bookmark` WHERE user_id = ? AND playlist_id = ?");
-         $remove_bookmark->execute([$user_id, $list_id]);
+         $remove_bookmark->execute([$tutor_id, $list_id]);
          $message[] = 'Course removed!';
       }else{
          $insert_bookmark = $conn->prepare("INSERT INTO `bookmark`(user_id, playlist_id) VALUES(?,?)");
-         $insert_bookmark->execute([$user_id, $list_id]);
-         $message[] = 'Course saved!';
+         $insert_bookmark->execute([$tutor_id, $list_id]);
+         $message[] = 'Course Joined!';
       }
 
    }else{
@@ -98,20 +98,7 @@ if(isset($_POST['save_list'])){
       ?>
 
       <div class="col">
-         <form action="" method="post" class="save-list">
-            <input type="hidden" name="list_id" value="<?= $playlist_id; ?>">
-            <?php
-               if($select_bookmark->rowCount() > 0){
-            ?>
-            <button type="submit" name="save_list"><i class="fas fa-bookmark"></i><span>Saved</span></button>
-            <?php
-               }else{
-            ?>
-               <button type="submit" name="save_list"><i class="far fa-bookmark"></i><span>Save Course</span></button>
-            <?php
-               }
-            ?>
-         </form>
+        
          <div class="thumb">
             <span><?= $total_videos; ?> videos and <?= $total_post; ?> posts</span>
             <img src="../uploaded_files/<?= $fetch_playlist['thumb']; ?>" alt="">
@@ -131,6 +118,20 @@ if(isset($_POST['save_list'])){
             <p><?= $fetch_playlist['description']; ?></p>
             <div class="date"><i class="fas fa-calendar"></i><span><?= $fetch_playlist['date']; ?></span></div>
          </div>
+         <form action="" method="post" class="save-list">
+            <input type="hidden" name="list_id" value="<?= $playlist_id; ?>">
+            <?php
+               if($select_bookmark->rowCount() > 0){
+            ?>
+            <button type="submit" name="save_list"><span>Joined</span></button>
+            <?php
+               }else{
+            ?>
+               <button type="submit" name="save_list"><span>Join Course</span></button>
+            <?php
+               }
+            ?>
+         </form>
       </div>
 
       <?php

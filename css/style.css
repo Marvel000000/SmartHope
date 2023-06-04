@@ -622,7 +622,7 @@ section{
    gap:2.5rem;
    flex-wrap: wrap;
    padding: 2rem;
-   background-color: var(--white);
+   background-color: #2a2a2a;
 }
 
 .playlist .row .col{
@@ -632,7 +632,7 @@ section{
 .playlist .row .col .save-list button{
    font-size: 2rem;
    border-radius: .5rem;
-   background-color: var(--light-bg);
+   background-color: var(--main-color);
    padding: 1.2rem 2.5rem;
    cursor: pointer;
    margin-bottom: 2rem;
@@ -652,11 +652,11 @@ section{
 }
 
 .playlist .row .col .save-list button:hover i{
-   color: var(--white);
+   color: var(--light-bg);
 }
 
 .playlist .row .col .save-list button:hover span{
-   color: var(--white);
+   color: var(--light-bg);
 }
 
 .playlist .row .col .thumb{
@@ -747,7 +747,7 @@ section{
    position: relative;
    border-radius: .5rem;
    padding: 2rem;
-   background-color: var(--white);
+   background-color: #2a2a2a;
 }
 
 .videos-container .box-container .box img{
