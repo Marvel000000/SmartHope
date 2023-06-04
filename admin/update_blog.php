@@ -154,7 +154,7 @@ if(isset($_POST['delete_blog'])){
          }
          ?>
       </select>
-      <img src="../uploaded_files/<?= $fecth_videos['thumb']; ?>" alt="">
+      <img src="../uploaded_files/<?= $fecth_blog['thumb']; ?>" alt="">
       <p>Update Thumbnail</p>
       <input type="file" name="thumb" accept="image/*" class="box">
       <input type="submit" value="update content" name="update" class="btn">
