@@ -104,13 +104,15 @@ if(isset($message) && is_array($message)){
             <p>Your email <span>*</span></p>
             <input type="email" name="email" placeholder="Enter your email" maxlength="20" required class="box">
          </div>
-         <div class="col">
+       <div class="col">
             <p>Your Password <span>*</span></p>
             <input type="password" name="pass" placeholder="Enter your password" maxlength="20" required class="box">
             <p>Confirm Password <span>*</span></p>
             <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" required class="box">
             <p>Select Pic <span>*</span></p>
             <input type="file" name="image" accept="image/*" required class="box">
+            <p>Input your certificate <span>*</span></p>
+            <input type="file" name="image"  class="box">
          </div>
       </div>
       <p class="link">Already have an account? <a href="login.php">Login Now</a></p>
