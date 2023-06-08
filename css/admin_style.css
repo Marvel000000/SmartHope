@@ -292,95 +292,6 @@ section{
    margin-top: .5rem;
 }
 
-.side-bar{
-   position: fixed;
-   top: 0; left: 0;
-   height: 100vh;
-   width: 30rem;
-   background-color: var(--white);
-   border-right: var(--border);
-   z-index: 1200;
-}
-
-.side-bar .close-side-bar{
-   text-align: right;
-   padding: 2rem;
-   padding-bottom: 0;
-   display: none;
-}
-
-.side-bar .close-side-bar i{
-   height: 4.5rem;
-   width: 4.5rem;
-   line-height: 4.4rem;
-   font-size: 2.5rem;
-   color: #fff;
-   cursor: pointer;
-   background-color: var(--red);
-   text-align: center;
-   border-radius: .5rem;
-}
-
-.side-bar .close-side-bar i:hover{
-   background-color: var(--black);
-}
-
-.side-bar .profile{
-   padding:3rem 2rem;
-   text-align: center;
-}
-
-.side-bar .profile img{
-   height: 10rem;
-   width: 10rem;
-   border-radius: 50%;
-   object-fit: cover;
-   margin-bottom: .5rem;
-}
-
-.side-bar .profile h3{
-   font-size: 2rem;
-   color: var(--black);
-}
-
-.side-bar .profile span{
-   color: var(--light-color);
-   font-size: 1.6rem;
-}
-
-.side-bar .profile .flex-btn{
-   margin-top: .5rem;
-}
-
-.side-bar .navbar a{
-   display:block;
-   padding: 2rem;
-   margin: .5rem 0;
-   font-size: 1.8rem;
-}
-
-.side-bar .navbar a i{
-   color: var(--main-color);
-   margin-right: 1.5rem;
-   transition: .2s linear;
-}
-
-.side-bar .navbar a span{
-   color: var(--light-color);
-}
-
-.side-bar .navbar a:hover{
-   background-color: var(--light-bg);
-}
-
-.side-bar .navbar a:hover i{
-   margin-right: 2.5rem;
-}
-
-.side-bar.active{
-   left: -31rem;
-}
-
 .form-container{
    display: flex;
    align-items: center;
@@ -841,7 +752,7 @@ section{
 }
 
 .view-content .container{
-   background-color: var(--white);
+   background-color: #2a2a2a;
    border-radius: .5rem;
    padding: 2rem;
 }
@@ -1105,4 +1016,43 @@ section{
       height: auto;
    }
 
+}
+
+.header .flex .navbar{
+   position: absolute;
+   top:125%; right:2rem;
+   border: var(--border);
+   background-color: #2a2a2a;
+   border-radius: .5rem;
+   width:30rem;
+   box-shadow: var(--border);
+   display: none;
+   animation: .2s linear fadeIn;
+}
+
+.header .flex .navbar.active{
+   display: inline-block;
+}
+
+@keyframes fadeIn {
+   0%{
+      transform: translateY(1rem);
+   }
+}
+
+.header .flex .navbar a{
+   display: block;
+   margin:2rem;
+   font-size: 2rem;
+   color:var(--black);
+}
+
+.header .flex .navbar a i{
+   margin-right: 1rem;
+   color:var(--main-color);
+   transition: .2s linear;
+}
+
+.header .flex .navbar a:hover i{
+   margin-right: 2rem;
 }

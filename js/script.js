@@ -1,5 +1,13 @@
 let body = document.body;
 
+let navbar = document.querySelector('.header .flex .navbar');
+
+document.querySelector('#menu-btn').onclick = () =>{
+   navbar.classList.toggle('active');
+   searchForm.classList.remove('active');
+   profile.classList.remove('active');
+}
+
 let profile = document.querySelector('.header .flex .profile');
 
 document.querySelector('#user-btn').onclick = () =>{
@@ -14,17 +22,6 @@ document.querySelector('#search-btn').onclick = () =>{
    profile.classList.remove('active');
 }
 
-let sideBar = document.querySelector('.side-bar');
-
-document.querySelector('#menu-btn').onclick = () =>{
-   sideBar.classList.toggle('active');
-   body.classList.toggle('active');
-}
-
-document.querySelector('.side-bar .close-side-bar').onclick = () =>{
-   sideBar.classList.remove('active');
-   body.classList.remove('active');
-}
 
 document.querySelectorAll('input[type="number"]').forEach(InputNumber => {
    InputNumber.oninput = () =>{
@@ -43,11 +40,3 @@ window.onscroll = () =>{
 
 }
 
-toggleBtn.onclick = (e) =>{
-   let darkMode = localStorage.getItem('dark-mode');
-   if(darkMode === 'disabled'){
-      enabelDarkMode();
-   }else{
-      disableDarkMode();
-   }
-}
