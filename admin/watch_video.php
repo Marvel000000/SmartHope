@@ -152,7 +152,7 @@ if(isset($_POST['update_now'])){
 </head>
 <body>
 
-<?php include '../components/admin_header.php'; ?>
+
 
 <?php
    if(isset($_POST['edit_comment'])){
@@ -164,7 +164,7 @@ if(isset($_POST['update_now'])){
          $fetch_edit_comment = $verify_comment->fetch(PDO::FETCH_ASSOC);
 ?>
 <section class="edit-comment">
-   <h1 class="heading">edti comment</h1>
+   <h1 class="heading">edit comment</h1>
    <form action="" method="post">
       <input type="hidden" name="update_id" value="<?= $fetch_edit_comment['id']; ?>">
       <textarea name="update_box" class="box" maxlength="1000" required placeholder="Please enter your comment" cols="30" rows="10"><?= $fetch_edit_comment['comment']; ?></textarea>
@@ -209,6 +209,7 @@ if(isset($_POST['update_now'])){
       <div class="info">
          <p><i class="fas fa-calendar"></i><span><?= $fetch_content['date']; ?></span></p>
       </div>
+      <!--
       <div class="tutor">
          <img src="../uploaded_files/<?= $fetch_tutor['image']; ?>" alt="">
          <div>
@@ -218,9 +219,9 @@ if(isset($_POST['update_now'])){
       </div>
       <form action="" method="post" class="flex">
          <input type="hidden" name="content_id" value="<?= $content_id; ?>">
-         <a href="playlist.php?get_id=<?= $fetch_content['playlist_id']; ?>" class="inline-btn">View Playlist</a>
-        
+         <a href="playlist.php?get_id=<?= $fetch_content['playlist_id']; ?>" class="inline-btn">View Course</a>
       </form>
+         -->
       <div class="description"><p><?= $fetch_content['description']; ?></p></div>
    </div>
    <?php
@@ -235,7 +236,7 @@ if(isset($_POST['update_now'])){
 <!-- watch video section ends -->
 
 <!-- comments section starts  -->
-
+<!---
 <section class="comments">
 
    <h1 class="heading">Add a comment</h1>
@@ -287,7 +288,7 @@ if(isset($_POST['update_now'])){
       }
       ?>
       </div>
-   
+   -->
 </section>
 
 <!-- comments section ends -->
