@@ -2,23 +2,37 @@
 
 include '../components/connect.php';
 
+if(isset($_COOKIE['tutor_id'])){
+   $tutor_id = $_COOKIE['tutor_id'];
+}else{
+   $tutor_id = '';
+   header('location:login.php');
+}
 if(isset($_COOKIE['user_id'])){
    $user_id = $_COOKIE['user_id'];
 }else{
    $user_id = '';
 }
 
-$select_likes = $conn->prepare("SELECT * FROM `likes` WHERE user_id = ?");
-$select_likes->execute([$user_id]);
+$select_contents = $conn->prepare("SELECT * FROM `content` WHERE tutor_id = ?");
+$select_contents->execute([$tutor_id]);
+$total_contents = $select_contents->rowCount();
+
+$select_blog = $conn->prepare("SELECT * FROM `blog` WHERE tutor_id = ?");
+$select_blog->execute([$tutor_id]);
+$total_post = $select_blog->rowCount();
+
+$select_playlists = $conn->prepare("SELECT * FROM `playlist` WHERE tutor_id = ?");
+$select_playlists->execute([$tutor_id]);
+$total_playlists = $select_playlists->rowCount();
+
+$select_likes = $conn->prepare("SELECT * FROM `likes` WHERE tutor_id = ?");
+$select_likes->execute([$tutor_id]);
 $total_likes = $select_likes->rowCount();
 
-$select_comments = $conn->prepare("SELECT * FROM `comments` WHERE user_id = ?");
-$select_comments->execute([$user_id]);
+$select_comments = $conn->prepare("SELECT * FROM `comments` WHERE tutor_id = ?");
+$select_comments->execute([$tutor_id]);
 $total_comments = $select_comments->rowCount();
-
-$select_bookmark = $conn->prepare("SELECT * FROM `bookmark` WHERE user_id = ?");
-$select_bookmark->execute([$user_id]);
-$total_bookmarked = $select_bookmark->rowCount();
 
 ?>
 
@@ -28,18 +42,19 @@ $total_bookmarked = $select_bookmark->rowCount();
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>home</title>
+   <title>Dashboard</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
    <!-- custom css file link  -->
+   <link rel="stylesheet" href="../css/admin_style.css">
    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
 
-<?php include '../components/user_header.php'; ?>
+<?php include '../components/admin_header.php'; ?>
 
 <!-- quotes section -->
 <section class="about">
@@ -89,21 +104,55 @@ $total_bookmarked = $select_bookmark->rowCount();
    </div>
 
 </section>
+   
+<section class="dashboard">
+
+   <h1 class="heading">Dashboard</h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <h3>Welcome!</h3>
+         <p><?= $fetch_profile['name']; ?></p>
+         <a href="profile.php" class="btn">View Profile</a>
+      </div>
+
+      <div class="box">
+         <h3><?= $total_playlists; ?></h3>
+         <p>Total Playlists</p>
+         <a href="add_playlist.php" class="btn">Add new Courses</a>
+      </div>
+
+      <div class="box">
+         <h3><?= $total_contents; ?></h3>
+         <p>Total Contents</p>
+         <a href="add_content.php" class="btn">Add new content</a>
+      </div>
+
+      <div class="box">
+         <h3><?= $total_post; ?></h3>
+         <p>Total Blog Post</p>
+         <a href="add_post.php" class="btn">Add new post</a>
+      </div>
+
+      <div class="box">
+         <h3><?= $total_comments; ?></h3>
+         <p>Total Comments</p>
+         <a href="comments.php" class="btn">View comments</a>
+      </div>
 
 
+   </div>
 
-<!-- quick select section ends -->
-
-<!-- courses section starts  -->
-
+</section>
 <section class="courses">
 
-   <h1 class="heading">latest courses</h1>
+   <h1 class="heading">all courses</h1>
 
    <div class="box-container">
 
       <?php
-         $select_courses = $conn->prepare("SELECT * FROM `playlist` WHERE status = ? ORDER BY date DESC LIMIT 6");
+         $select_courses = $conn->prepare("SELECT * FROM `playlist` WHERE status = ? ORDER BY date DESC");
          $select_courses->execute(['active']);
          if($select_courses->rowCount() > 0){
             while($fetch_course = $select_courses->fetch(PDO::FETCH_ASSOC)){
@@ -123,7 +172,7 @@ $total_bookmarked = $select_bookmark->rowCount();
          </div>
          <img src="../uploaded_files/<?= $fetch_course['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fetch_course['title']; ?></h3>
-         <a href="login.php" class="inline-btn">view courses</a>
+         <a href="playlist.php?get_id=<?= $course_id; ?>" class="inline-btn">View Course</a>
       </div>
       <?php
          }
@@ -134,17 +183,9 @@ $total_bookmarked = $select_bookmark->rowCount();
 
    </div>
 
-   <div class="more-btn">
-      <a href="courses.php" class="inline-option-btn">View More</a>
-   </div>
-
 </section>
 
-<!-- courses section ends -->
+<script src="../js/admin_script.js"></script>
 
-
-<!-- custom js file link  -->
-<script src="../js/script.js"></script>
-   
 </body>
 </html>
