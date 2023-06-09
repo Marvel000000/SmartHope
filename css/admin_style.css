@@ -295,12 +295,11 @@ section{
 .form-container{
    display: flex;
    align-items: center;
-   justify-content: center;
+   justify-content: left;
    min-height: 100vh;
 }
 
 .form-container form{
-   background-color: var(--white);
    border-radius: .5rem;
    padding: 2rem;
 }
@@ -319,6 +318,7 @@ section{
    margin-bottom: 1rem;
    color: var(--black);
    text-transform: capitalize;
+   align-self: left;
 }
 
 .form-container form p{
@@ -363,6 +363,7 @@ section{
 
 .form-container .flex .col{
    flex: 1 1 25rem;
+   background-color: #2a2a2a;
 }
 
 .dashboard .box-container{
@@ -455,7 +456,6 @@ section{
 }
 
 .playlist-form form{
-   background-color: #2a2a2a;
    border-radius: .5rem;
    padding: 2rem;
    padding-top: 1rem;
@@ -480,6 +480,7 @@ section{
    font-size: 1.8rem;
    color: var(--black);
    background: var(--light-bg);
+   background-color: #2a2a2a;
    width: 100%;
 }
 
@@ -589,7 +590,6 @@ section{
 .video-form form{
    max-width: 50rem;
    margin: 0 auto;
-   background-color: #2a2a2a;
    border-radius: .5rem;
    padding: 2rem;
    padding-top: 1rem;
@@ -612,6 +612,7 @@ section{
    padding: 1.4rem;
    font-size: 1.8rem;
    color: var(--black);
+   background-color: #2a2a2a;
    margin: 1rem 0;
 }
 
@@ -985,6 +986,7 @@ section{
       display: flex;
       gap: 0;
       flex-flow: column;
+      justify-content: left;
    }
 
    .view-content .container .video{

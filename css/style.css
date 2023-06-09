@@ -151,7 +151,7 @@ section{
 
 .message i{
    font-size: 2.5rem;
-   color:var(--red);
+   color:red;
    cursor: pointer;
    transition: .2s linear;
 }
@@ -1244,7 +1244,7 @@ section{
 .form-container{
    display: flex;
    align-items: center;
-   justify-content: center;
+   justify-content: left;
    min-height:80vh;
 }
 
