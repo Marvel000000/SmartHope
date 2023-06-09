@@ -295,7 +295,7 @@ section{
 .form-container{
    display: flex;
    align-items: center;
-   justify-content: left;
+   justify-content: center;
    min-height: 100vh;
 }
 
@@ -304,12 +304,19 @@ section{
    padding: 2rem;
 }
 
-.form-container .login{
+.form-container .login{ 
    width: 50rem;
+   background-color: #333;
+   border-color: #65008d;
+   border-width: 0.1rem;
+}
+.form-container .login .box{
+   background-color: #2a2a2a;
 }
 
 .form-container .register{
    width: 80rem;
+   background-color: #333;
 }
 
 .form-container form h3{
@@ -338,7 +345,7 @@ section{
 }
 
 .form-container .link a{
-   color: var(--main-color);
+   color: #65008d;
 }
 
 .form-container .link a:hover{
@@ -353,7 +360,7 @@ section{
    font-size: 1.8rem;
    color: var(--black);
    padding: 1.4rem;
-   background-color: var(--light-bg);
+   background-color: #2a2a2a;
 }
 
 .form-container .flex{
@@ -363,6 +370,9 @@ section{
 
 .form-container .flex .col{
    flex: 1 1 25rem;
+   
+}
+.form-container .flex .col .box {
    background-color: #2a2a2a;
 }
 
