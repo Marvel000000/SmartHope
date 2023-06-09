@@ -111,35 +111,7 @@ if (isset($_POST['submit'])) {
         a.discrete:hover {
             border-bottom: solid 1px rgba(#000, .2);
         }
-
-        button {
-            -webkit-appearance: none;
-            width: auto;
-            min-width: 100px;
-            border-radius: 24px;
-            text-align: center;
-            padding: 15px 40px;
-            margin-top: 5px;
-            background-color: #808080;
-            color: #FFFFFF;
-            font-size: 14px;
-            margin-left: 200px;
-            font-weight: 500;
-            box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .13);
-            border: none;
-            transition: all .3s ease;
-            outline: 0;
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 2px 6px -1px rgba($primary, .65);
-        }
-
-        button:active {
-            transform: scale(.99);
-        }
-
+        
         input {
             font-size: 20px;
             padding: 20px 0px;
@@ -302,7 +274,7 @@ if (isset($_POST['submit'])) {
                 <div class="floating-label">
                     <input type="password" name="pass" id="pass" placeholder="Password" required style="font-size: 20px; color: #FFFFFF; padding: 20px 0px; height: 70px; border: none; border-bottom: solid 2px rgba(0, 0, 0, 1); background: #808080; width: 280px; box-sizing: border-box; transition: all .3s linear; color: #FFFFFF; font-weight: 400; -webkit-appearance: none;">
                 </div>
-                <button type="submit" name="submit" style="-webkit-appearance: none; width: auto; min-width: 100px; border-radius: 24px; text-align: center; padding: 15px 40px; margin-top: 5px; background-color: #808080; color: #FFFFFF; font-size: 14px; margin-left: 200px; font-weight: 500; box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .13); border: none; transition: all .3s ease; outline: 0;">Login</button>
+                <button type="submit" name="submit" style="-webkit-appearance: none; width: auto; min-width: 100px; border-radius: 24px; text-align: center; padding: 15px 40px; margin-top: 5px; background-color: #65008d; color: #000000; font-size: 14px; margin-left: 200px; font-weight: 500; box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, .13); border: none; transition: all .3s ease; outline: 0;">Login</button>
             </form>
         </div>
     </div>
