@@ -1,150 +1,153 @@
-<?php
-
-include '../components/connect.php';
-
-if (isset($_POST['submit'])) {
-   $id = unique_id();
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
-   $profession = $_POST['profession'];
-   $profession = filter_var($profession, FILTER_SANITIZE_STRING);
-   $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $pass = $_POST['pass'];
-   $pass = filter_var($pass, FILTER_SANITIZE_STRING);
-   $cpass = $_POST['cpass'];
-   $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
-
-   $image = $_FILES['image']['name'];
-   $image = filter_var($image, FILTER_SANITIZE_STRING);
-   $ext = pathinfo($image, PATHINFO_EXTENSION);
-   $rename = unique_id().'.'.$ext;
-   $image_size = $_FILES['image']['size'];
-   $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_folder = '../uploaded_files/'.$rename;
-
-   $select_tutor = $conn->prepare("SELECT * FROM `tutors` WHERE email = ?");
-   $select_tutor->execute([$email]);
-
-   if ($select_tutor->rowCount() > 0) {
-      $message[] = 'Email already taken!';
-   } else {
-      if ($pass != $cpass) {
-         $message[] = 'Confirm password not matched!';
-      } else {
-         // Hash the password using bcrypt algorithm
-         $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
-
-         $insert_tutor = $conn->prepare("INSERT INTO `tutors`(id, name, profession, email, password, image) VALUES(?,?,?,?,?,?)");
-         $insert_tutor->execute([$id, $name, $profession, $email, $hashed_pass, $rename]);
-         move_uploaded_file($image_tmp_name, $image_folder);
-         $message[] = 'New tutor registered! Please login now.';
-      }
-   }
-}
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Register</title>
+    <title>Form Example</title>
+    <style>
+        body {
+            background-color: #333333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-   <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+        .container {
+            display: flex;
+            height: 90vh;
+            color :#FFFFFF;
+        }
 
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="../css/admin_style.css">
-   <link rel="stylesheet" href="../css/style.css">
+        .image-container {
+            flex: 1;
+            text-align: right;
+            padding-right: 20px;
+            height: 605px;
+        }
 
+        .image-container img {
+            width: 750px;
+            height: 107.62%;
+        }
+
+        .form-container {
+            flex: 1;
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color : #FFFFFF;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="password"],
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+            background-color : #808080;
+            border-color: #000000;
+        }
+
+        .form-container button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #65008d;
+            color: #000000;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #808080;
+        }
+    </style>
 </head>
-<body style="padding-left: 0;">
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="https://scientific-publishing.webshop.elsevier.com/wp-content/uploads/2022/08/what-background-study-how-to-write-1200x801.jpg" alt="Image">
+        </div>
+        <div class="form-container">
+            <h2>Register</h2>
+            <form method="POST" action="">
+                <label for="name">Name:</label>
+                <input type="text" name="name" required style="font-size: 20px; color: #FFFFFF; width: 525px">
+                <label for="profession">Profession:</label>
+                <input type="text" name="profession" required style="font-size: 20px; color: #FFFFFF; width: 525px">
+                <label for="email">Email:</label>
+                <input type="email" name="email" required style="font-size: 20px; color: #FFFFFF; width: 525px">
+                <label for="pass">Password:</label>
+                <input type="password" name="pass" required style="font-size: 20px; color: #FFFFFF; width: 525px">
+                <label for="cpass">Confirm Password:</label>
+                <input type="password" name="cpass" required style="font-size: 20px; color: #FFFFFF; width: 525px">
+                <label for="image">Image:</label>
+                <input type="file" name="image" required>
+                <label for="Evidence">Evidence:</label>
+                <input type="file" name="image" required>
+                <button type="submit" name="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <?php
 
-<?php
-if(isset($message) && is_array($message)){
-   foreach($message as $message){
-      echo '
-      <div class="message form">
-         <span>'.$message.'</span>
-         <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
-      </div>
-      ';
-   }
-}
-?>
+    include '../components/connect.php';
 
-<!-- register section starts  -->
+    if (isset($_POST['submit'])) {
+       $id = unique_id();
+       $name = $_POST['name'];
+       $name = filter_var($name, FILTER_SANITIZE_STRING);
+       $profession = $_POST['profession'];
+       $profession = filter_var($profession, FILTER_SANITIZE_STRING);
+       $email = $_POST['email'];
+       $email = filter_var($email, FILTER_SANITIZE_STRING);
+       $pass = $_POST['pass'];
+       $pass = filter_var($pass, FILTER_SANITIZE_STRING);
+       $cpass = $_POST['cpass'];
+       $cpass = filter_var($cpass, FILTER_SANITIZE_STRING);
 
-<section class="form-container">
+       $image = $_FILES['image']['name'];
+       $image = filter_var($image, FILTER_SANITIZE_STRING);
+       $ext = pathinfo($image, PATHINFO_EXTENSION);
+       $rename = unique_id().'.'.$ext;
+       $image_size = $_FILES['image']['size'];
+       $image_tmp_name = $_FILES['image']['tmp_name'];
+       $image_folder = '../uploaded_files/'.$rename;
 
-   <form class="register" action="" method="post" enctype="multipart/form-data">
-      <h3>Register New</h3>
-      <div class="flex">
-         <div class="col">
-            <p>Your Name <span>*</span></p>
-            <input type="text" name="name" placeholder="Enter your name" maxlength="50" required class="box">
-            <p>Your Profession <span>*</span></p>
-            <select name="profession" class="box" required>
-               <option value="" disabled selected>-- Select your profession</option>
-               <option value="developer">Developer</option>
-               <option value="desginer">Desginer</option>
-               <option value="musician">Musician</option>
-               <option value="biologist">Biologist</option>
-               <option value="teacher">Teacher</option>
-               <option value="engineer">Engineer</option>
-               <option value="lawyer">Lawyer</option>
-               <option value="accountant">Accountant</option>
-               <option value="doctor">Doctor</option>
-               <option value="journalist">Journalist</option>
-               <option value="photographer">Photographer</option>
-               <option value="Student">Student</option>
-            </select>
-            <p>Your email <span>*</span></p>
-            <input type="email" name="email" placeholder="Enter your email" maxlength="20" required class="box">
-         </div>
-       <div class="col">
-            <p>Your Password <span>*</span></p>
-            <input type="password" name="pass" placeholder="Enter your password" maxlength="20" required class="box">
-            <p>Confirm Password <span>*</span></p>
-            <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" required class="box">
-            <p>Select Pic <span>*</span></p>
-            <input type="file" name="image" accept="image/*" required class="box">
-            <p>Input your certificate <span>*</span></p>
-            <input type="file" name="image"  class="box">
-         </div>
-      </div>
-      <p class="link">Already have an account? <a href="login.php">Login Now</a></p>
-      <input type="submit" name="submit" value="register now" class="btn">
-   </form>
+       $select_tutor = $conn->prepare("SELECT * FROM `tutors` WHERE email = ?");
+       $select_tutor->execute([$email]);
 
-</section>
+       if ($select_tutor->rowCount() > 0) {
+          $message[] = 'Email already taken!';
+       } else {
+          if ($pass != $cpass) {
+             $message[] = 'Confirm password not matched!';
+          } else {
+             // Hash the password using bcrypt algorithm
+             $hashed_pass = password_hash($pass, PASSWORD_DEFAULT);
 
-<!-- registe section ends -->
+             $insert_tutor = $conn->prepare("INSERT INTO `tutors`(id, name, profession, email, password, image) VALUES(?,?,?,?,?,?)");
+             $insert_tutor->execute([$id, $name, $profession, $email, $hashed_pass, $rename]);
+             move_uploaded_file($image_tmp_name, $image_folder);
+             $message[] = 'New tutor registered! Please login now.';
+          }
+       }
+    }
+    ?>
 
-<script>
-
-let darkMode = localStorage.getItem('dark-mode');
-let body = document.body;
-
-const enabelDarkMode = () =>{
-   body.classList.add('dark');
-   localStorage.setItem('dark-mode', 'enabled');
-}
-
-const disableDarkMode = () =>{
-   body.classList.remove('dark');
-   localStorage.setItem('dark-mode', 'disabled');
-}
-
-if(darkMode === 'enabled'){
-   enabelDarkMode();
-}else{
-   disableDarkMode();
-}
-
-</script>
-   
 </body>
 </html>
