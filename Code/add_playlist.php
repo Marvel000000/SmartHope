@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Add Playlist</title>
+   <title>Add Course</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -57,27 +57,38 @@ if(isset($_POST['submit'])){
 <body>
 
 <?php include '../components/admin_header.php'; ?>
+
+
+<section class="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="../images/add_course.webp" alt="">
+      </div>
    
-<section class="playlist-form">
+      <section class="playlist-form">
 
-   <h1 class="heading">Create Playlist</h1>
+         <h1 class="heading">Create Course</h1>
 
-   <form action="" method="post" enctype="multipart/form-data">
-      <p>Playlist Status <span>*</span></p>
-      <select name="status" class="box" required>
-         <option value="" selected disabled>-- Select status</option>
-         <option value="active">Active</option>
-         <option value="deactive">Deactive</option>
-      </select>
-      <p>Playlist Title <span>*</span></p>
-      <input type="text" name="title" maxlength="100" required placeholder="Enter playlist title" class="box">
-      <p>Playlist Description <span>*</span></p>
-      <textarea name="description" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10"></textarea>
-      <p>Playlist Thumbnail <span>*</span></p>
-      <input type="file" name="image" accept="image/*" required class="box">
-      <input type="submit" value="create playlist" name="submit" class="btn">
-   </form>
+         <form action="" method="post" enctype="multipart/form-data">
+            <p>Course Status <span>*</span></p>
+            <select name="status" class="box" required>
+               <option value="" selected disabled>-- Select status</option>
+               <option value="active">Active</option>
+               <option value="deactive">Deactive</option>
+            </select>
+            <p>Course Title <span>*</span></p>
+            <input type="text" name="title" maxlength="100" required placeholder="Enter Course title" class="box">
+            <p>Course Description <span>*</span></p>
+            <textarea name="description" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10"></textarea>
+            <p>Course Thumbnail <span>*</span></p>
+            <input type="file" name="image" accept="image/*" required class="box">
+            <input type="submit" value="create Course" name="submit" class="btn">
+         </form>
 
+      </section>
+   </div>
 </section>
 
 <script src="../js/admin_script.js"></script>

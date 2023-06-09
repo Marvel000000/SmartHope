@@ -69,7 +69,14 @@ if(isset($_POST['submit'])){
 <body>
 
 <?php include '../components/admin_header.php'; ?>
-   
+<section class="about">
+
+<div class="row">
+
+   <div class="image">
+      <img src="../images/video_add.webp" alt="">
+   </div>
+
 <section class="video-form">
 
    <h1 class="heading">Upload Content</h1>
@@ -112,6 +119,8 @@ if(isset($_POST['submit'])){
       
    </form>
 
+</section>
+</div>
 </section>
 
 <script src="../js/admin_script.js"></script>

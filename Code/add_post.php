@@ -62,6 +62,14 @@ if(isset($_POST['submit'])){
 
 <?php include '../components/admin_header.php' ?>
 
+<section class="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="../images/add_blog.webp" alt="">
+      </div>
+
 <section class="video-form">
 
    <h1 class="heading">Add New Post</h1>
@@ -104,6 +112,8 @@ if(isset($_POST['submit'])){
       <input type="submit" value="publish post" name="submit" class="btn">
    </form>
 
+</section>
+      </div>
 </section>
 
 <!-- custom js file link  -->

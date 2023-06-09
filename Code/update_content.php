@@ -129,6 +129,14 @@ if(isset($_POST['delete_video'])){
 <body>
 
 <?php include '../components/admin_header.php'; ?>
+
+<section class="about">
+
+<div class="row">
+
+   <div class="image">
+      <img src="../images/video_add.webp" alt="">
+   </div>
    
 <section class="video-form">
 
@@ -155,7 +163,7 @@ if(isset($_POST['delete_video'])){
       <input type="text" name="title" maxlength="100" required placeholder="Enter video title" class="box" value="<?= $fecth_videos['title']; ?>">
       <p>Update Description <span>*</span></p>
       <textarea name="description" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10"><?= $fecth_videos['description']; ?></textarea>
-      <p>Update Playlist</p>
+      <p>Update Content</p>
       <select name="playlist" class="box">
          <option value="<?= $fecth_videos['playlist_id']; ?>" selected>--Select playlist</option>
          <?php
@@ -181,10 +189,6 @@ if(isset($_POST['delete_video'])){
       <p>Update Video</p>
       <input type="file" name="video" accept="video/*" class="box">
       <input type="submit" value="update content" name="update" class="btn">
-      <div class="flex-btn">
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="option-btn">View Content</a>
-         <input type="submit" value="delete content" name="delete_video" class="delete-btn">
-      </div>
    </form>
    <?php
          }
@@ -193,6 +197,8 @@ if(isset($_POST['delete_video'])){
       }
    ?>
 
+</section>
+</div>
 </section>
 
 <script src="../js/admin_script.js"></script>

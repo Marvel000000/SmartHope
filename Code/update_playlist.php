@@ -77,7 +77,7 @@ if(isset($_POST['delete'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Update Playlist</title>
+   <title>Update Course</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
@@ -90,10 +90,18 @@ if(isset($_POST['delete'])){
 <body>
 
 <?php include '../components/admin_header.php'; ?>
+
+<section class="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="../images/add_course.webp" alt="">
+      </div>
    
 <section class="playlist-form">
 
-   <h1 class="heading">Update Playlist</h1>
+   <h1 class="heading">Update Course</h1>
 
    <?php
          $select_playlist = $conn->prepare("SELECT * FROM `playlist` WHERE id = ?");
@@ -107,27 +115,23 @@ if(isset($_POST['delete'])){
       ?>
    <form action="" method="post" enctype="multipart/form-data">
       <input type="hidden" name="old_image" value="<?= $fetch_playlist['thumb']; ?>">
-      <p>Playlist Status <span>*</span></p>
+      <p>Course Status <span>*</span></p>
       <select name="status" class="box" required>
          <option value="<?= $fetch_playlist['status']; ?>" selected><?= $fetch_playlist['status']; ?></option>
          <option value="active">Active</option>
          <option value="deactive">Deactive</option>
       </select>
-      <p>Playlist Title <span>*</span></p>
+      <p>Course Title <span>*</span></p>
       <input type="text" name="title" maxlength="100" required placeholder="Enter playlist title" value="<?= $fetch_playlist['title']; ?>" class="box">
-      <p>Playlist Description <span>*</span></p>
+      <p>Course Description <span>*</span></p>
       <textarea name="description" class="box" required placeholder="Write description" maxlength="1000" cols="30" rows="10"><?= $fetch_playlist['description']; ?></textarea>
-      <p>Playlist Thumbnail <span>*</span></p>
+      <p>Course Thumbnail <span>*</span></p>
       <div class="thumb">
          <span><?= $total_videos; ?></span>
          <img src="../uploaded_files/<?= $fetch_playlist['thumb']; ?>" alt="">
       </div>
       <input type="file" name="image" accept="image/*" class="box">
       <input type="submit" value="update playlist" name="submit" class="btn">
-      <div class="flex-btn">
-         <input type="submit" value="delete" class="delete-btn" onclick="return confirm('delete this playlist?');" name="delete">
-         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">View Playlist</a>
-      </div>
    </form>
    <?php
       } 
@@ -137,6 +141,9 @@ if(isset($_POST['delete'])){
    ?>
 
 </section>
+</div>
+</section>
+
 
 
 

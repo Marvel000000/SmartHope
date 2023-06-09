@@ -82,7 +82,7 @@ if(isset($_POST['delete_video'])){
    
 <section class="playlist-details">
 
-   <h1 class="heading">playlist details</h1>
+   <h1 class="heading">Course details</h1>
 
    <?php
       $select_playlist = $conn->prepare("SELECT * FROM `playlist` WHERE id = ? AND tutor_id = ?");
@@ -105,7 +105,7 @@ if(isset($_POST['delete_video'])){
          <div class="description"><?= $fetch_playlist['description']; ?></div>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="playlist_id" value="<?= $playlist_id; ?>">
-            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">Update Playlist</a>
+            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">Update Course</a>
             <input type="submit" value="delete playlist" class="delete-btn" onclick="return confirm('Delete this playlist?');" name="delete">
          </form>
       </div>
@@ -113,7 +113,7 @@ if(isset($_POST['delete_video'])){
    <?php
          }
       }else{
-         echo '<p class="empty">No playlist found!</p>';
+         echo '<p class="empty">No course found!</p>';
       }
    ?>
 
@@ -121,7 +121,7 @@ if(isset($_POST['delete_video'])){
 
 <section class="contents">
 
-   <h1 class="heading">Playlist Videos</h1>
+   <h1 class="heading">Course Videos</h1>
 
    <div class="box-container">
 
@@ -159,14 +159,9 @@ if(isset($_POST['delete_video'])){
 
 <section class="contents">
 
-   <h1 class="heading">Your Blog</h1>
+   <h1 class="heading">Course Blog</h1>
 
    <div class="box-container">
-
-   <div class="box" style="text-align: center;">
-      <h3 class="title" style="margin-bottom: .5rem;">Create new blog</h3>
-      <a href="add_post.php" class="btn">Add blog</a>
-   </div>
 
 <?php
       $select_blog = $conn->prepare("SELECT * FROM `blog` WHERE tutor_id = ? ORDER BY date DESC");
@@ -201,7 +196,7 @@ if(isset($_POST['delete_video'])){
    ?>
 
    </div>
-   <a href="add_content.php" class="btn" style="margin-top: 1.5rem;">add blogs</a>
+   <a href="add_post.php" class="btn" style="margin-top: 1.5rem;">add blogs</a>
 </section>
 
 <script src="../js/admin_script.js"></script>

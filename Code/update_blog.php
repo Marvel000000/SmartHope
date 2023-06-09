@@ -108,6 +108,13 @@ if(isset($_POST['delete_blog'])){
 <body>
 
 <?php include '../components/admin_header.php'; ?>
+<section class="about">
+
+   <div class="row">
+
+      <div class="image">
+         <img src="../images/add_blog.webp" alt="">
+      </div>
    
 <section class="video-form">
 
@@ -158,10 +165,7 @@ if(isset($_POST['delete_blog'])){
       <p>Update Thumbnail</p>
       <input type="file" name="thumb" accept="image/*" class="box">
       <input type="submit" value="update content" name="update" class="btn">
-      <div class="flex-btn">
-         <a href="view_blog.php?get_id=<?= $blog_id; ?>" class="option-btn">View Blog</a>
-         <input type="submit" value="delete blog" name="delete_blog" class="delete-btn">
-      </div>
+   
    </form>
    <?php
          }
@@ -171,6 +175,9 @@ if(isset($_POST['delete_blog'])){
    ?>
 
 </section>
+   </div>
+</section>
+
 
 <script src="../js/admin_script.js"></script>
 

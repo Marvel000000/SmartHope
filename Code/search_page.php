@@ -110,10 +110,11 @@ if(isset($_POST['delete_playlist'])){
    <div class="box-container">
 
    <?php
-      if(isset($_POST['search']) or isset($_POST['search_btn'])){
+     if (isset($_POST['search']) or isset($_POST['search_btn'])) {
       $search = $_POST['search'];
-      $select_videos = $conn->prepare("SELECT * FROM `content` WHERE title LIKE '%{$search}%' AND tutor_id = ? ORDER BY date DESC");
-      $select_videos->execute([$tutor_id]);
+      $select_videos = $conn->prepare("SELECT * FROM `content` WHERE title LIKE ? ORDER BY date DESC");
+      $select_videos->execute(["%$search%"]); // Use an array with the search parameter
+
       if($select_videos->rowCount() > 0){
          while($fecth_videos = $select_videos->fetch(PDO::FETCH_ASSOC)){ 
             $video_id = $fecth_videos['id'];
@@ -125,12 +126,7 @@ if(isset($_POST['delete_playlist'])){
          </div>
          <img src="../uploaded_files/<?= $fecth_videos['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fecth_videos['title']; ?></h3>
-         <form action="" method="post" class="flex-btn">
-            <input type="hidden" name="video_id" value="<?= $video_id; ?>">
-            <a href="update_content.php?get_id=<?= $video_id; ?>" class="option-btn">Update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this video?');" name="delete_video">
-         </form>
-         <a href="view_content.php?get_id=<?= $video_id; ?>" class="btn">view content</a>
+         <a href="watch_video.php?get_id=<?= $video_id; ?>" class="btn">view content</a>
       </div>
    <?php
          }
@@ -153,10 +149,10 @@ if(isset($_POST['delete_playlist'])){
    <div class="box-container">
 
    <?php
-      if(isset($_POST['search']) or isset($_POST['search_btn'])){
+     if (isset($_POST['search']) || isset($_POST['search_btn'])) {
       $search = $_POST['search'];
-      $select_blog = $conn->prepare("SELECT * FROM `blog` WHERE title LIKE '%{$search}%' AND tutor_id = ? ORDER BY date DESC");
-      $select_blog->execute([$tutor_id]);
+      $select_blog = $conn->prepare("SELECT * FROM `blog` WHERE title LIKE ? ORDER BY date DESC");
+      $select_blog->execute(["%$search%"]);
        if($select_blog->rowCount() > 0){
           while($fecth_blog = $select_blog->fetch(PDO::FETCH_ASSOC)){ 
             $blog_id = $fecth_blog['id'];
@@ -168,11 +164,6 @@ if(isset($_POST['delete_playlist'])){
          </div>
          <img src="../uploaded_files/<?= $fecth_blog['thumb']; ?>" class="thumb" alt="">
          <h3 class="title"><?= $fecth_blog['title']; ?></h3>
-         <form action="" method="post" class="flex-btn">
-            <input type="hidden" name="blog_id" value="<?= $blog_id; ?>">
-            <a href="update_content.php?get_id=<?= $blog_id; ?>" class="option-btn">Update</a>
-            <input type="submit" value="delete" class="delete-btn" onclick="return confirm('Delete this blog?');" name="delete_blog">
-         </form>
          <a href="view_blog.php?get_id=<?= $blog_id; ?>" class="btn">View Blog</a>
       </div>
    <?php
@@ -191,15 +182,15 @@ if(isset($_POST['delete_playlist'])){
 
 <section class="playlists">
 
-   <h1 class="heading">Playlists</h1>
+   <h1 class="heading">Course</h1>
 
    <div class="box-container">
    
       <?php
-      if(isset($_POST['search']) or isset($_POST['search_btn'])){
-         $search = $_POST['search'];
-         $select_playlist = $conn->prepare("SELECT * FROM `playlist` WHERE title LIKE '%{$search}%' AND tutor_id = ? ORDER BY date DESC");
-         $select_playlist->execute([$tutor_id]);
+         if (isset($_POST['search']) || isset($_POST['search_btn'])) {
+            $search = $_POST['search'];
+            $select_playlist = $conn->prepare("SELECT * FROM `playlist` WHERE title LIKE ? ORDER BY date DESC");
+            $select_playlist->execute(["%$search%"]);
          if($select_playlist->rowCount() > 0){
          while($fetch_playlist = $select_playlist->fetch(PDO::FETCH_ASSOC)){
             $playlist_id = $fetch_playlist['id'];
@@ -220,15 +211,12 @@ if(isset($_POST['delete_playlist'])){
          <p class="description"><?= $fetch_playlist['description']; ?></p>
          <form action="" method="post" class="flex-btn">
             <input type="hidden" name="playlist_id" value="<?= $playlist_id; ?>">
-            <a href="update_playlist.php?get_id=<?= $playlist_id; ?>" class="option-btn">Update</a>
-            <input type="submit" value="delete_playlist" class="delete-btn" onclick="return confirm('Delete this playlist?');" name="delete">
-         </form>
-         <a href="view_playlist.php?get_id=<?= $playlist_id; ?>" class="btn">View Playlist</a>
+         <a href="playlist.php?get_id=<?= $playlist_id; ?>" class="btn">View Course</a>
       </div>
       <?php
          } 
       }else{
-         echo '<p class="empty">No playlists found!</p>';
+         echo '<p class="empty">No Course found!</p>';
       }}else{
          echo '<p class="empty">Please search something!</p>';
       }
