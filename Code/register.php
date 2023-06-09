@@ -2,107 +2,54 @@
 <html>
 <head>
     <title>Form Example</title>
-    <style>
-        body {
-            background-color: #333333;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            display: flex;
-            height: 90vh;
-            color :#FFFFFF;
-        }
-
-        .image-container {
-            flex: 1;
-            text-align: right;
-            padding-right: 20px;
-            height: 605px;
-        }
-
-        .image-container img {
-            width: 750px;
-            height: 107.62%;
-        }
-
-        .form-container {
-            flex: 1;
-            background-color: #333333;
-            padding: 20px;
-            border-radius: 5px;
-        }
-
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color : #FFFFFF;
-        }
-
-        .form-container label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #FFFFFF;
-        }
-
-        .form-container input[type="text"],
-        .form-container input[type="email"],
-        .form-container input[type="password"],
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 3px;
-            background-color : #808080;
-            border-color: #000000;
-        }
-
-        .form-container button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-top: 20px;
-            background-color: #65008d;
-            color: #000000;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .form-container button:hover {
-            background-color: #808080;
-        }
-    </style>
+   
+    <link rel="stylesheet" href="../css/admin_style.css"> 
+    <link rel="stylesheet" href="../css/style.css"> 
 </head>
 <body>
-    <div class="container">
-        <div class="image-container">
-            <img src="https://scientific-publishing.webshop.elsevier.com/wp-content/uploads/2022/08/what-background-study-how-to-write-1200x801.jpg" alt="Image">
-        </div>
-        <div class="form-container">
-            <h2>Register</h2>
-            <form method="POST" action="">
-                <label for="name">Name:</label>
-                <input type="text" name="name" required style="font-size: 20px; color: #FFFFFF; width: 525px">
-                <label for="profession">Profession:</label>
-                <input type="text" name="profession" required style="font-size: 20px; color: #FFFFFF; width: 525px">
-                <label for="email">Email:</label>
-                <input type="email" name="email" required style="font-size: 20px; color: #FFFFFF; width: 525px">
-                <label for="pass">Password:</label>
-                <input type="password" name="pass" required style="font-size: 20px; color: #FFFFFF; width: 525px">
-                <label for="cpass">Confirm Password:</label>
-                <input type="password" name="cpass" required style="font-size: 20px; color: #FFFFFF; width: 525px">
-                <label for="image">Image:</label>
-                <input type="file" name="image" required>
-                <label for="Evidence">Evidence:</label>
-                <input type="file" name="image" required>
-                <button type="submit" name="submit">Submit</button>
-            </form>
-        </div>
-    </div>
+    <section class="form-container">
+
+   <form class="register" action="" method="post" enctype="multipart/form-data">
+      <h3>Register</h3>
+      <div class="flex">
+         <div class="col">
+            <p>Your Name <span>*</span></p>
+            <input type="text" name="name" placeholder="Enter your name" maxlength="50" required class="box">
+            <p>Your Profession <span>*</span></p>
+            <select name="profession" class="box" required>
+               <option value="" disabled selected>-- Select your profession</option>
+               <option value="developer">Developer</option>
+               <option value="desginer">Desginer</option>
+               <option value="musician">Musician</option>
+               <option value="biologist">Biologist</option>
+               <option value="teacher">Teacher</option>
+               <option value="engineer">Engineer</option>
+               <option value="lawyer">Lawyer</option>
+               <option value="accountant">Accountant</option>
+               <option value="doctor">Doctor</option>
+               <option value="journalist">Journalist</option>
+               <option value="photographer">Photographer</option>
+               <option value="Student">Student</option>
+            </select>
+            <p>Your email <span>*</span></p>
+            <input type="email" name="email" placeholder="Enter your email" maxlength="20" required class="box">
+         </div>
+         <div class="col">
+            <p>Your Password <span>*</span></p>
+            <input type="password" name="pass" placeholder="Enter your password" maxlength="20" required class="box">
+            <p>Confirm Password <span>*</span></p>
+            <input type="password" name="cpass" placeholder="Confirm your password" maxlength="20" required class="box">
+            <p>Select Pic <span>*</span></p>
+            <input type="file" name="image" accept="image/*" required class="box">
+            <p>Input your certificate <span>*</span></p>
+            <input type="file" name="image"  class="box">
+         </div>
+      </div>
+      <p class="link">Already have an account? <a href="login.php">Login Now</a></p>
+      <input type="submit" name="submit" value="register now" class="btn">
+   </form>
+
+</section>
     <?php
 
     include '../components/connect.php';
